@@ -6,7 +6,7 @@ const router = express.Router();
 
 const mysqlConnection = require ('../database');
 
-router.get('/TodoslosEmpleados', (req, res) => {
+router.get('/TodoslosEmpleado', (req, res) => {
     mysqlConnection.query('SELECT * FROM empleados', (err, rows, fields) => {
         if (!err) {
             res.json(rows);
