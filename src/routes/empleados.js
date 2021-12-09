@@ -28,9 +28,9 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/create', (req, res) => {
-    const {id, nombre, salario} = req.body;
+    const {id, nombre, salario, latitud, longitud} = req.body;
     const query = `
-        CALL SP_Add_Edit_Empleado(?, ?, ?, ?)
+        CALL SP_Add_Edit_Empleado(?, ?, ?, ?, ?)
     `;
     mysqlConnection.query(query, [nombre, salario, latitud, longitud], (err, rows, fields) => {
         if (!err) {
@@ -41,8 +41,8 @@ router.post('/create', (req, res) => {
     })
 });
 
-router.put('/update/', (req, res) => {
-    const {nombre, salario } = req.body;
+router.put('/update/:id', (req, res) => {
+    const {nombre, salario, latitud, longitud} = req.body;
     const {id} = req.params;
     const query = 'CALL SP_Add_Edit_Empleado(?, ?, ?, ?, ?)';
     mysqlConnection.query(query, [id, nombre, salario, latitud, longitud], (err, rows, fields) => {
