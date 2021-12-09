@@ -27,7 +27,7 @@ router.get('/:id', (req, res) => {
     })
 });
 
-router.post('/create', (req, res) => {
+router.post('/create/', (req, res) => {
     const {id, nombre, salario} = req.body;
     const query = `
         CALL SP_Add_Edit_Empleado(?, ?, ?, ?, ?)
