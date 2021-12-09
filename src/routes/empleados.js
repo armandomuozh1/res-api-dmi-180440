@@ -30,9 +30,9 @@ router.get('/:id', (req, res) => {
 router.post('/create', (req, res) => {
     const {id, nombre, salario} = req.body;
     const query = `
-        CALL SP_Add_Edit_Empleado(?, ?, ?, ?, ?)
+        CALL SP_Add_Edit_Empleado(?, ?, ?, ?)
     `;
-    mysqlConnection.query(query, [id, nombre, salario, latitud, longitud], (err, rows, fields) => {
+    mysqlConnection.query(query, [nombre, salario, latitud, longitud], (err, rows, fields) => {
         if (!err) {
             res.json({Status: 'Empleado Guardado'});
         } else {
@@ -54,7 +54,7 @@ router.put('/update/', (req, res) => {
     })
 })
 
-router.delete('/delete/', (req, res) => {
+router.delete('/delete/:id', (req, res) => {
     const {id} = req.params;
     mysqlConnection.query('DELETE FROM empleados WHERE id = ?', [id], (err, rows, fields) => {
         if (!err) {
