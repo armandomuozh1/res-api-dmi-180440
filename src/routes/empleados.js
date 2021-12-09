@@ -6,7 +6,7 @@ const router = express.Router();
 
 const mysqlConnection = require ('../database');
 
-router.get('/TodoslosEmpleados', (req, res) => {
+router.get('/TodoslosEmpleado', (req, res) => {
     mysqlConnection.query('SELECT * FROM empleados', (err, rows, fields) => {
         if (!err) {
             res.json(rows);
@@ -32,7 +32,7 @@ router.post('/', (req, res) => {
     const query = `
         CALL SP_Add_Edit_Empleado(?, ?, ?)
     `;
-    mysqlConnection.query(query, [id, nombre, salario], (err, rows, fields) => {
+    mysqlConnection.query(query, [id, nombre, salario, latitud, longitud], (err, rows, fields) => {
         if (!err) {
             res.json({Status: 'Empleado Guardado'});
         } else {
@@ -45,7 +45,7 @@ router.put('/:id', (req, res) => {
     const {nombre, salario } = req.body;
     const {id} = req.params;
     const query = 'CALL SP_Add_Edit_Empleado(?, ?, ?)';
-    mysqlConnection.query(query, [id, nombre, salario], (err, rows, fields) => {
+    mysqlConnection.query(query, [id, nombre, salario, latitud, longitud], (err, rows, fields) => {
         if (!err) {
             res.json({status: 'Empleado Actualizado'});
         } else {
