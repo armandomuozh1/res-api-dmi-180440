@@ -1,6 +1,6 @@
 const mysql = require('mysql');
 
-const mysqlConnection =  mysql.createConnection({
+const mysqlConnection =  mysql.createPool({
     host: 'byjtegxht44daenmhuv8-mysql.services.clever-cloud.com',
     port: '3306',
     user: 'uvgyzdh23of6df1f',
