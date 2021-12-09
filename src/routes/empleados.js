@@ -28,11 +28,11 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/create', (req, res) => {
-    const {nombre, salario, latitud, longitud} = req.body;
+    const {id, nombre, salario, latitud, longitud} = req.body;
     const query = `
-        CALL SP_Add_Edit_Empleado(?, ?, ?, ?)
+        CALL SP_Add_Edit_Empleado(?, ?, ?, ?, ?)
     `;
-    mysqlConnection.query(query, [nombre, salario, latitud, longitud], (err, rows, fields) => {
+    mysqlConnection.query(query, [id, nombre, salario, latitud, longitud], (err, rows, fields) => {
         if (!err) {
             res.json({Status: 'Empleado Guardado'});
         } else {
