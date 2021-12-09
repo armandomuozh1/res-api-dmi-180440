@@ -27,10 +27,10 @@ router.get('/:id', (req, res) => {
     })
 });
 
-router.post('/', (req, res) => {
+router.post('/create', (req, res) => {
     const {id, nombre, salario} = req.body;
     const query = `
-        CALL SP_Add_Edit_Empleado(?, ?, ?)
+        CALL SP_Add_Edit_Empleado(?, ?, ?, ?, ?)
     `;
     mysqlConnection.query(query, [id, nombre, salario, latitud, longitud], (err, rows, fields) => {
         if (!err) {
@@ -41,10 +41,10 @@ router.post('/', (req, res) => {
     })
 });
 
-router.put('/:id', (req, res) => {
+router.put('/update/', (req, res) => {
     const {nombre, salario } = req.body;
     const {id} = req.params;
-    const query = 'CALL SP_Add_Edit_Empleado(?, ?, ?)';
+    const query = 'CALL SP_Add_Edit_Empleado(?, ?, ?, ?, ?)';
     mysqlConnection.query(query, [id, nombre, salario, latitud, longitud], (err, rows, fields) => {
         if (!err) {
             res.json({status: 'Empleado Actualizado'});
@@ -54,7 +54,7 @@ router.put('/:id', (req, res) => {
     })
 })
 
-router.delete('/:id', (req, res) => {
+router.delete('/delete/', (req, res) => {
     const {id} = req.params;
     mysqlConnection.query('DELETE FROM empleados WHERE id = ?', [id], (err, rows, fields) => {
         if (!err) {
