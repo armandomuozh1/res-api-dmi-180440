@@ -15,6 +15,30 @@ router.get('/TodoslosEmpleados', (req, res) => {
         }
     });
 });
+/* API CITAS PARA PWA */
+router.get('/CitasAutolavado', (req, res) => {
+    mysqlConnection.query('SELECT * FROM citaAutolavado180440', (err, rows, fields) => {
+        if (!err) {
+            res.json(rows);
+        } else {
+            console.log(err);
+        }
+    });
+});
+router.post('/crearCita', (req, res) => {
+    const {id, nombre, apellidos, marca, placas, dia, hora, tipo} = req.body;
+    const query = `
+        CALL crearCitaAutolavado(?, ?, ?, ?, ?, ?, ?, ?)
+    `;
+    mysqlConnection.query(query, [id, nombre, apellidos, marca, placas, dia, hora, tipo], (err, rows, fields) => {
+        if (!err) {
+            res.json({Status: 'Empleado Guardado'});
+        } else {
+            console.log(err);
+        }
+    })
+});
+/* FIN API CITAS PARA PWA */
 
 router.get('/:id', (req, res) => {
     const { id } = req.params;
