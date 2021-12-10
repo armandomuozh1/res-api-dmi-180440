@@ -26,11 +26,11 @@ router.get('/CitasAutolavado', (req, res) => {
     });
 });
 router.post('/crearCita', (req, res) => {
-    const {id, nombre, apellidos, marca, placas, dia, hora, tipo} = req.body;
+    const {nombre, apellidos, marca, placas, dia, hora, tipo} = req.body;
     const query = `
-        CALL crearCitaAutolavado(?, ?, ?, ?, ?, ?, ?, ?)
+        CALL crearCitaAutolavado(?, ?, ?, ?, ?, ?, ?)
     `;
-    mysqlConnection.query(query, [id, nombre, apellidos, marca, placas, dia, hora, tipo], (err, rows, fields) => {
+    mysqlConnection.query(query, [nombre, apellidos, marca, placas, dia, hora, tipo], (err, rows, fields) => {
         if (!err) {
             res.json({Status: 'Empleado Guardado'});
         } else {
